@@ -7,138 +7,213 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        /* Dasar & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
         
-        body {
+        /* --- 1. KUNCI TOTAL BODY (ANTI-GERAK & ANTI-MENTAL) --- */
+        html, body {
             font-family: 'Inter', sans-serif;
             color: #eaeaea;
-            background-color: #000;
-            /* --- LOCK SCROLL --- */
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            background-color: #000; /* Hitam mutlak penambal celah */
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Matikan scroll body utama */
+            overscroll-behavior: none; /* Matikan efek mental browser */
+        }
+
+        /* --- 2. BACKGROUND DIPAKU KE LAYAR --- */
+        .fixed-bg-container {
             position: fixed; 
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh; 
+            z-index: 0; 
+            pointer-events: none; 
         }
 
         #video-bg {
-            position: fixed; 
-            top: 50%; left: 50%;
-            min-width: 100%; min-height: 100%;
-            z-index: -3; 
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Paksa pas layar, ga ngeroom */
+            display: block;
         }
 
-        .glass-overlay {
-            position: fixed; 
+        /* Overlay sangat tipis dengan sentuhan dark red */
+        .overlay {
+            position: absolute;
             top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.35); 
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 0, 0, 0.4); 
+            z-index: 1; 
+        }
+
+        /* --- 3. AREA KONTEN (CUMA INI YANG BISA SCROLL) --- */
+        .scrollable-content {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto; 
+            overflow-x: hidden;
+            z-index: 2; 
+            -webkit-overflow-scrolling: touch; 
+            overscroll-behavior-y: none; /* Kunci biar ga mental & ga celah hitam */
         }
 
         .container {
             width: 100%; max-width: 400px;
-            height: 100vh; /* Full layar */
             margin: 0 auto;
             text-align: center; 
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Konten otomatis di tengah layar */
-            padding: 20px;
-            position: relative;
+            padding: 80px 20px 100px 20px; 
         }
 
-        /* --- ANIMASI --- */
+        /* --- ANIMASI MASUK --- */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+
         .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; } 
         .delay-2 { animation-delay: 0.3s; } 
         .delay-3 { animation-delay: 0.5s; } 
         .delay-4 { animation-delay: 0.7s; } 
+        .delay-5 { animation-delay: 0.9s; } 
 
-        /* Avatar Floating */
+        /* --- PROFIL AVATAR (ANIMASI NAIK TURUN) --- */
         .avatar {
-            width: 100px; height: 100px;
+            width: 110px; height: 110px;
             border-radius: 50%; 
             border: 2px solid rgba(139, 0, 0, 0.4); 
-            padding: 4px; margin: 0 auto 15px;
+            padding: 4px; margin: 0 auto 20px auto;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
             background: rgba(10, 0, 0, 0.5);
             animation: floatAvatar 4s ease-in-out infinite;
         }
+
         @keyframes floatAvatar {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
 
-        h1 { font-size: 1.6rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
-        .username { font-size: 0.8rem; color: #8b2a2a; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; }
+        h1 {
+            font-size: 1.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
 
-        /* Tombol Transparan */
-        .links-container { display: flex; flex-direction: column; gap: 15px; }
+        .username {
+            font-size: 0.85rem; 
+            color: #8b2a2a; 
+            font-weight: 500; 
+            letter-spacing: 3px;
+            margin-bottom: 50px; 
+            text-transform: uppercase;
+        }
+
+        /* --- TOMBOL TRANSPARAN (GLASSMORPHISM) --- */
+        .links-container { display: flex; flex-direction: column; gap: 18px; }
+        .btn-wrapper { width: 100%; }
+
         .link-card {
             background: rgba(20, 0, 0, 0.45); 
             border-radius: 12px; 
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            padding: 14px 20px; 
-            color: #fff; 
+            padding: 16px 20px; 
+            color: #ffffff; 
             text-decoration: none;
             font-weight: 500; 
             letter-spacing: 1.5px;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-        .link-card i { font-size: 1.2rem; color: #fff; }
-        .link-card:hover { background: rgba(60, 0, 0, 0.6); transform: translateY(-3px); }
 
-        .footer { margin-top: 50px; font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 3px; }
+        /* LOGO PUTIH SOLID */
+        .link-card i { 
+            font-size: 1.3rem; 
+            color: #ffffff; 
+            width: 25px; 
+            text-align: center; 
+            transition: 0.3s;
+        }
+
+        /* Hover efek */
+        .link-card:hover {
+            background: rgba(60, 0, 0, 0.6);
+            border-color: rgba(139, 0, 0, 0.5); 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .link-card:hover i { 
+            transform: scale(1.1);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .footer { 
+            margin-top: 80px; 
+            font-size: 0.7rem; 
+            color: rgba(255, 255, 255, 0.2); 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
 
-    <video autoplay muted loop playsinline id="video-bg">
-        <source src="bg.mp4" type="video/mp4">
-    </video>
-    <div class="glass-overlay"></div>
+    <div class="fixed-bg-container">
+        <video autoplay muted loop playsinline id="video-bg">
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
 
-    <div class="container">
-        <div class="fade-in delay-1">
-            <img src="avatar.jpg" alt="Profile" class="avatar">
-            <h1>Shotozakirei</h1>
-            <div class="username">@shotozakirei</div>
+    <div class="scrollable-content">
+        <div class="container">
+            
+            <div class="fade-in delay-1">
+                <img src="avatar.jpg" alt="Profile" class="avatar">
+                <h1>Shotozakirei</h1>
+                <div class="username">@shotozakirei</div>
+            </div>
+
+            <div class="links-container">
+                <div class="btn-wrapper fade-in delay-2">
+                    <a href="https://open.spotify.com/user/31fr7mfuacdokppwhjcdi3zkzsla?si=2vas8obmST2ssZBLgJE0KA" class="link-card" target="_blank">
+                        <i class="fa-brands fa-spotify"></i><span>Spotify</span>
+                    </a>
+                </div>
+
+                <div class="btn-wrapper fade-in delay-3">
+                    <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card" target="_blank">
+                        <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+                    </a>
+                </div>
+
+                <div class="btn-wrapper fade-in delay-3">
+                    <a href="https://tiktok.com/@alonerlonly" class="link-card" target="_blank">
+                        <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
+                    </a>
+                </div>
+
+                <div class="btn-wrapper fade-in delay-4">
+                    <a href="https://f2p.life" class="link-card" target="_blank">
+                        <i class="fa-solid fa-globe"></i><span>f2p.life</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer fade-in delay-5">MANAGED BY ILMI © 2026</div>
         </div>
-
-        <div class="links-container">
-            <div class="btn-wrapper fade-in delay-2">
-                <a href="https://open.spotify.com/user/31fr7mfuacdokppwhjcdi3zkzsla?si=2vas8obmST2ssZBLgJE0KA" class="link-card" target="_blank">
-                    <i class="fa-brands fa-spotify"></i><span>Spotify</span>
-                </a>
-            </div>
-            <div class="btn-wrapper fade-in delay-3">
-                <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card" target="_blank">
-                    <i class="fa-brands fa-instagram"></i><span>Instagram</span>
-                </a>
-            </div>
-            <div class="btn-wrapper fade-in delay-3">
-                <a href="https://tiktok.com/@alonerlonly" class="link-card" target="_blank">
-                    <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
-                </a>
-            </div>
-            <div class="btn-wrapper fade-in delay-4">
-                <a href="https://f2p.life" class="link-card" target="_blank">
-                    <i class="fa-solid fa-globe"></i><span>f2p.life</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="footer fade-in delay-4">MANAGED BY ILMI © 2026</div>
     </div>
 
 </body>
