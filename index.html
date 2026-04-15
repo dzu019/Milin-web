@@ -13,13 +13,13 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #eaeaea;
-            background-color: #050505;
+            background-color: #000; /* Hitam mutlak */
             overflow-x: hidden;
             overflow-y: auto; 
             min-height: 100vh;
         }
 
-        /* --- BACKGROUND VIDEO DENGAN EFEK KALEM --- */
+        /* --- BACKGROUND VIDEO (FULL VISIBILITY) --- */
         #video-bg {
             position: fixed; 
             top: 50%; left: 50%;
@@ -27,15 +27,19 @@
             z-index: -3; 
             transform: translate(-50%, -50%);
             object-fit: cover;
+            /* Pastikan video gelap agar teks kebaca */
+            filter: brightness(0.7) contrast(1.1);
         }
 
-        /* Overlay gelap & blur tipis biar sinematik */
+        /* Overlay gelap sinematik */
         .glass-overlay {
             position: fixed; 
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(10, 10, 10, 0.75); /* Hitam transparan kalem */
-            backdrop-filter: blur(4px); /* Efek buram yang estetik */
+            /* Lighter overlay to let video show through */
+            background: linear-gradient(180deg, rgba(5, 5, 5, 0.6) 0%, rgba(15, 0, 0, 0.8) 100%);
+            /* BLUR DIKURANGI AGAR VIDEO KELIHTAN JELAS (PENTING!) */
+            backdrop-filter: blur(1.5px); 
             z-index: -2;
         }
 
@@ -60,49 +64,22 @@
             animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* --- ANIMASI PULSING GLOW UNTUK AVATAR (PREMIUM) --- */
-        @keyframes avatarPulseGlow {
-            0% { 
-                border-color: rgba(255, 255, 255, 0.1); 
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            }
-            100% { 
-                border-color: rgba(255, 255, 255, 0.3); /* Sedikit lebih terang */
-                box-shadow: 0 0 40px rgba(255, 255, 255, 0.15); /* Glowredup */
-            }
-        }
-
-        /* Delay agar munculnya bergantian (Sekarang di kotak profil) */
+        /* Delay agar munculnya bergantian */
         .delay-1 { animation-delay: 0.1s; } /* Kotak Profil */
-        .delay-2 { animation-delay: 0.6s; } /* Spotify */
-        .delay-3 { animation-delay: 0.8s; } /* Instagram */
-        .delay-4 { animation-delay: 1.0s; } /* TikTok & F2P */
-        .delay-5 { animation-delay: 1.2s; } /* Footer */
+        .delay-2 { animation-delay: 0.3s; } /* Spotify */
+        .delay-3 { animation-delay: 0.5s; } /* Instagram */
+        .delay-4 { animation-delay: 0.7s; } /* TikTok & F2P */
+        .delay-5 { animation-delay: 0.9s; } /* Footer */
 
-        /* Kotak Profil (Staggered Entrance) */
-        .profile-section {
-            display: flex; flex-direction: column; align-items: center; margin-bottom: 50px;
-        }
-
+        /* Profil Avatar Dark Red */
         .avatar {
             width: 110px; height: 110px;
             border-radius: 50%; 
-            border: 2px solid rgba(255, 255, 255, 0.1); /* Garis abu-abu tipis awal */
+            border: 3px solid #660000; /* Dark Red solid */
             padding: 4px; margin-bottom: 20px;
-            background: rgba(20, 20, 20, 0.5);
-            /* Animasi berdenyut default (Subtle) */
-            animation: avatarPulseGlow 3s ease-in-out infinite alternate;
+            box-shadow: 0 10px 30px rgba(102, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5);
         }
-
-        /* Muncul bergantian di dalam profil */
-        .profile-item {
-            opacity: 0;
-            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-        
-        .p-avatar { animation-delay: 0.1s; }
-        .p-name { animation-delay: 0.2s; }
-        .p-username { animation-delay: 0.3s; }
 
         h1 {
             font-size: 1.7rem;
@@ -110,44 +87,49 @@
             margin-bottom: 5px;
             color: #ffffff;
             font-weight: 600;
+            text-transform: uppercase;
             text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         .username {
             font-size: 0.85rem; 
-            color: #888888; /* Abu-abu kalem */
+            color: #ff3333; /* Merah menyala tipis buat aksen */
             font-weight: 400; 
             letter-spacing: 3px;
+            margin-bottom: 50px; 
             text-transform: uppercase;
         }
 
-        /* --- TOMBOL MASCULINE STEALTH --- */
-        .links-container { display: flex; flex-direction: column; gap: 18px; }
+        /* --- TOMBOL MASCULINE STEALTH (DENGAN GARIS PUTUS-PUTUS) --- */
+        .links-container { display: flex; flex-direction: column; gap: 20px; }
         .btn-wrapper { width: 100%; }
 
         .link-card {
-            background: rgba(25, 25, 25, 0.5); /* Hitam transparan elegan */
-            border-radius: 10px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); /* Garis nyaris tak terlihat */
+            background: rgba(10, 10, 10, 0.7); /* Hitam transparan lebih pekat */
+            border-radius: 6px; /* Lebih kotak biar maskulin */
+            
+            /* GARIS PUTUS-PUTUS WARNA MERAH GELAP (PENTING!) */
+            border: 2px dashed #4a0000; 
+            
             padding: 16px 20px; 
-            color: #cccccc; 
+            color: #e0e0e0; 
             text-decoration: none;
             font-weight: 400; 
             letter-spacing: 1.5px;
             display: flex; align-items: center; justify-content: center; gap: 15px;
-            transition: all 0.4s ease;
+            transition: all 0.4s ease-in-out;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         /* Ikon abu-abu kalem */
-        .link-card i { font-size: 1.3rem; color: #888888; transition: 0.4s; width: 25px; text-align: center; }
+        .link-card i { font-size: 1.3rem; color: #660000; transition: 0.4s; width: 25px; text-align: center; }
 
-        /* Hover efek: nyala putih redup, sangat elegan */
+        /* Hover efek: nyala merah berkelas */
         .link-card:hover {
-            background: rgba(45, 45, 45, 0.7);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            background: rgba(30, 0, 0, 0.9);
+            border-color: #ff3333; /* Jadi merah menyala saat hover */
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
             color: #ffffff;
         }
 
@@ -156,7 +138,7 @@
         .footer { 
             margin-top: 80px; 
             font-size: 0.7rem; 
-            color: rgba(255, 255, 255, 0.2); 
+            color: rgba(255, 51, 51, 0.3); /* Merah redup */
             letter-spacing: 4px; 
             text-transform: uppercase;
             font-weight: 400;
@@ -171,16 +153,10 @@
     <div class="glass-overlay"></div>
 
     <div class="container">
-        <div class="profile-section">
-            <div class="profile-item p-avatar">
-                <img src="avatar.jpg" alt="Profile" class="avatar">
-            </div>
-            <div class="profile-item p-name">
-                <h1>Shotozakirei</h1>
-            </div>
-            <div class="profile-item p-username">
-                <div class="username">@shotozakirei</div>
-            </div>
+        <div class="fade-in delay-1">
+            <img src="avatar.jpg" alt="Profile" class="avatar">
+            <h1>Shotozakirei</h1>
+            <div class="username">@shotozakirei</div>
         </div>
 
         <div class="links-container">
