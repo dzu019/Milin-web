@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links | Shotozakirei</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Dasar & Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            background-color: #050000;
+            overflow-x: hidden;
+            overflow-y: auto; 
+            min-height: 100vh;
+        }
+
+        /* --- BACKGROUND VIDEO --- */
+        #video-bg {
+            position: fixed; 
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            z-index: -2; 
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* Overlay gelap merah marun */
+        .overlay {
+            position: fixed; 
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: linear-gradient(180deg, rgba(10, 0, 0, 0.75) 0%, rgba(30, 0, 0, 0.85) 100%);
+            z-index: -1;
+        }
+
+        /* Container Utama */
+        .container {
+            width: 100%; max-width: 400px;
+            margin: 0 auto;
+            text-align: center; 
+            z-index: 1;
+            padding: 70px 20px 80px 20px; 
+            position: relative;
+        }
+
+        /* Profil Avatar */
+        .avatar {
+            width: 110px; height: 110px;
+            border-radius: 50%; 
+            border: 2px solid #8B0000;
+            padding: 4px; margin-bottom: 15px;
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .username {
+            font-size: 0.9rem; color: #ff4d4d;
+            font-weight: 700; letter-spacing: 2px;
+            margin-bottom: 50px; 
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+        }
+
+        /* --- TOMBOL DARK RED --- */
+        .links-container { display: flex; flex-direction: column; gap: 20px; }
+        .btn-wrapper { position: relative; width: 100%; }
+
+        .link-card {
+            background: rgba(15, 15, 15, 0.85);
+            border-radius: 12px;
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            padding: 16px 20px; 
+            color: white; 
+            text-decoration: none;
+            font-weight: 600; 
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+            display: flex; align-items: center; gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover efek menyala */
+        .btn-wrapper:hover .link-card {
+            background: rgba(35, 5, 5, 0.9);
+            border-color: #ff3333;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            color: #ffffff;
+        }
+
+        /* Ikon & Warna Khusus */
+        .link-card i { font-size: 1.4rem; width: 25px; text-align: center; }
+        .icon-spotify { color: #1DB954; }
+        .icon-ig { color: #E1306C; }
+        .icon-tiktok { color: #ffffff; }
+        .icon-web { color: #ff4d4d; }
+
+        .footer { 
+            margin-top: 60px; 
+            font-size: 0.7rem; 
+            color: rgba(255, 77, 77, 0.4); 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <img src="avatar.jpg" alt="Profile" class="avatar">
+        <h1>Shotozakirei</h1>
+        <div class="username">shotozakirei</div>
+
+        <div class="links-container">
+            <div class="btn-wrapper">
+                <a href="https://open.spotify.com/user/31fr7mfuacdokppwhjcdi3zkzsla?si=2vas8obmST2ssZBLgJE0KA" class="link-card" target="_blank">
+                    <i class="fa-brands fa-spotify icon-spotify"></i><span>Spotify</span>
+                </a>
+            </div>
+
+            <div class="btn-wrapper">
+                <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card" target="_blank">
+                    <i class="fa-brands fa-instagram icon-ig"></i><span>Instagram</span>
+                </a>
+            </div>
+
+            <div class="btn-wrapper">
+                <a href="https://tiktok.com/@alonerlonly" class="link-card" target="_blank">
+                    <i class="fa-brands fa-tiktok icon-tiktok"></i><span>TikTok</span>
+                </a>
+            </div>
+
+            <div class="btn-wrapper">
+                <a href="https://f2p.life" class="link-card" target="_blank">
+                    <i class="fa-solid fa-globe icon-web"></i><span>f2p.life</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">MANAGED BY ILMI © 2026</div>
+    </div>
+
+</body>
+</html>
