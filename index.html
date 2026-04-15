@@ -2,24 +2,24 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Links | Shotozakirei</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Dasar & Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         
         body {
             font-family: 'Inter', sans-serif;
             color: #eaeaea;
             background-color: #000;
-            overflow-x: hidden;
-            overflow-y: auto; 
-            min-height: 100vh;
+            /* --- LOCK SCROLL --- */
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: fixed; 
         }
 
-        /* --- BACKGROUND VIDEO JELAS --- */
         #video-bg {
             position: fixed; 
             top: 50%; left: 50%;
@@ -29,7 +29,6 @@
             object-fit: cover;
         }
 
-        /* Overlay tipis agar video tetap tajam */
         .glass-overlay {
             position: fixed; 
             top: 0; left: 0;
@@ -38,121 +37,68 @@
             z-index: -2;
         }
 
-        /* Container Utama */
         .container {
             width: 100%; max-width: 400px;
+            height: 100vh; /* Full layar */
             margin: 0 auto;
             text-align: center; 
             z-index: 1;
-            padding: 80px 20px 100px 20px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Konten otomatis di tengah layar */
+            padding: 20px;
             position: relative;
         }
 
-        /* --- ANIMASI MASUK --- */
+        /* --- ANIMASI --- */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        .fade-in {
-            opacity: 0; 
-            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
+        .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         .delay-1 { animation-delay: 0.1s; } 
         .delay-2 { animation-delay: 0.3s; } 
         .delay-3 { animation-delay: 0.5s; } 
         .delay-4 { animation-delay: 0.7s; } 
-        .delay-5 { animation-delay: 0.9s; } 
 
-        /* --- PROFIL AVATAR (ANIMASI NAIK TURUN) --- */
+        /* Avatar Floating */
         .avatar {
-            width: 110px; height: 110px;
+            width: 100px; height: 100px;
             border-radius: 50%; 
             border: 2px solid rgba(139, 0, 0, 0.4); 
-            padding: 4px; margin-bottom: 20px;
+            padding: 4px; margin: 0 auto 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
             background: rgba(10, 0, 0, 0.5);
             animation: floatAvatar 4s ease-in-out infinite;
         }
-
         @keyframes floatAvatar {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-10px); }
         }
 
-        h1 {
-            font-size: 1.7rem;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            color: #ffffff;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-        }
+        h1 { font-size: 1.6rem; letter-spacing: 2px; color: #fff; text-transform: uppercase; }
+        .username { font-size: 0.8rem; color: #8b2a2a; letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; }
 
-        .username {
-            font-size: 0.85rem; 
-            color: #8b2a2a; 
-            font-weight: 500; 
-            letter-spacing: 3px;
-            margin-bottom: 50px; 
-            text-transform: uppercase;
-        }
-
-        /* --- TOMBOL TRANSPARAN (GLASSMORPHISM) --- */
-        .links-container { display: flex; flex-direction: column; gap: 18px; }
-        .btn-wrapper { width: 100%; }
-
+        /* Tombol Transparan */
+        .links-container { display: flex; flex-direction: column; gap: 15px; }
         .link-card {
-            /* Transparansi 45% dengan semburat merah gelap */
             background: rgba(20, 0, 0, 0.45); 
             border-radius: 12px; 
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            
-            padding: 16px 20px; 
-            color: #ffffff; 
+            padding: 14px 20px; 
+            color: #fff; 
             text-decoration: none;
             font-weight: 500; 
             letter-spacing: 1.5px;
-            display: flex; align-items: center; justify-content: center; gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            
-            /* Efek Blur di belakang tombol (Mirip Miku) */
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            transition: 0.3s;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
+        .link-card i { font-size: 1.2rem; color: #fff; }
+        .link-card:hover { background: rgba(60, 0, 0, 0.6); transform: translateY(-3px); }
 
-        /* LOGO PUTIH SOLID */
-        .link-card i { 
-            font-size: 1.3rem; 
-            color: #ffffff; 
-            width: 25px; 
-            text-align: center; 
-        }
-
-        /* Hover efek: Transparansi berkurang & glow merah tipis */
-        .link-card:hover {
-            background: rgba(60, 0, 0, 0.6);
-            border-color: rgba(139, 0, 0, 0.5); 
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-        }
-
-        .link-card:hover i { 
-            transform: scale(1.1);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
-
-        .footer { 
-            margin-top: 80px; 
-            font-size: 0.7rem; 
-            color: rgba(255, 255, 255, 0.2); 
-            letter-spacing: 4px; 
-            text-transform: uppercase;
-            font-weight: 400;
-        }
+        .footer { margin-top: 50px; font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 3px; }
     </style>
 </head>
 <body>
@@ -175,19 +121,16 @@
                     <i class="fa-brands fa-spotify"></i><span>Spotify</span>
                 </a>
             </div>
-
             <div class="btn-wrapper fade-in delay-3">
                 <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card" target="_blank">
                     <i class="fa-brands fa-instagram"></i><span>Instagram</span>
                 </a>
             </div>
-
             <div class="btn-wrapper fade-in delay-3">
                 <a href="https://tiktok.com/@alonerlonly" class="link-card" target="_blank">
                     <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
                 </a>
             </div>
-
             <div class="btn-wrapper fade-in delay-4">
                 <a href="https://f2p.life" class="link-card" target="_blank">
                     <i class="fa-solid fa-globe"></i><span>f2p.life</span>
@@ -195,7 +138,7 @@
             </div>
         </div>
 
-        <div class="footer fade-in delay-5">MANAGED BY ILMI © 2026</div>
+        <div class="footer fade-in delay-4">MANAGED BY ILMI © 2026</div>
     </div>
 
 </body>
