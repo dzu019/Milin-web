@@ -60,21 +60,49 @@
             animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* Delay agar munculnya bergantian */
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.3s; }
-        .delay-3 { animation-delay: 0.5s; }
-        .delay-4 { animation-delay: 0.7s; }
+        /* --- ANIMASI PULSING GLOW UNTUK AVATAR (PREMIUM) --- */
+        @keyframes avatarPulseGlow {
+            0% { 
+                border-color: rgba(255, 255, 255, 0.1); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            }
+            100% { 
+                border-color: rgba(255, 255, 255, 0.3); /* Sedikit lebih terang */
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.15); /* Glowredup */
+            }
+        }
 
-        /* Profil Avatar */
+        /* Delay agar munculnya bergantian (Sekarang di kotak profil) */
+        .delay-1 { animation-delay: 0.1s; } /* Kotak Profil */
+        .delay-2 { animation-delay: 0.6s; } /* Spotify */
+        .delay-3 { animation-delay: 0.8s; } /* Instagram */
+        .delay-4 { animation-delay: 1.0s; } /* TikTok & F2P */
+        .delay-5 { animation-delay: 1.2s; } /* Footer */
+
+        /* Kotak Profil (Staggered Entrance) */
+        .profile-section {
+            display: flex; flex-direction: column; align-items: center; margin-bottom: 50px;
+        }
+
         .avatar {
             width: 110px; height: 110px;
             border-radius: 50%; 
-            border: 2px solid rgba(255, 255, 255, 0.1); /* Garis abu-abu tipis */
+            border: 2px solid rgba(255, 255, 255, 0.1); /* Garis abu-abu tipis awal */
             padding: 4px; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             background: rgba(20, 20, 20, 0.5);
+            /* Animasi berdenyut default (Subtle) */
+            animation: avatarPulseGlow 3s ease-in-out infinite alternate;
         }
+
+        /* Muncul bergantian di dalam profil */
+        .profile-item {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        
+        .p-avatar { animation-delay: 0.1s; }
+        .p-name { animation-delay: 0.2s; }
+        .p-username { animation-delay: 0.3s; }
 
         h1 {
             font-size: 1.7rem;
@@ -87,10 +115,9 @@
 
         .username {
             font-size: 0.85rem; 
-            color: #888888; /* Abu-abu kalem, bukan merah lagi */
+            color: #888888; /* Abu-abu kalem */
             font-weight: 400; 
             letter-spacing: 3px;
-            margin-bottom: 50px; 
             text-transform: uppercase;
         }
 
@@ -144,10 +171,16 @@
     <div class="glass-overlay"></div>
 
     <div class="container">
-        <div class="fade-in delay-1">
-            <img src="avatar.jpg" alt="Profile" class="avatar">
-            <h1>Shotozakirei</h1>
-            <div class="username">@shotozakirei</div>
+        <div class="profile-section">
+            <div class="profile-item p-avatar">
+                <img src="avatar.jpg" alt="Profile" class="avatar">
+            </div>
+            <div class="profile-item p-name">
+                <h1>Shotozakirei</h1>
+            </div>
+            <div class="profile-item p-username">
+                <div class="username">@shotozakirei</div>
+            </div>
         </div>
 
         <div class="links-container">
@@ -176,7 +209,7 @@
             </div>
         </div>
 
-        <div class="footer fade-in delay-4">MANAGED BY ILMI © 2026</div>
+        <div class="footer fade-in delay-5">MANAGED BY ILMI © 2026</div>
     </div>
 
 </body>
