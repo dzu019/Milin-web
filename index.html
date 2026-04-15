@@ -13,13 +13,13 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #eaeaea;
-            background-color: #000; /* Hitam mutlak */
+            background-color: #000;
             overflow-x: hidden;
             overflow-y: auto; 
             min-height: 100vh;
         }
 
-        /* --- BACKGROUND VIDEO (FULL VISIBILITY) --- */
+        /* --- BACKGROUND VIDEO (DIJAMIN JELAS 100%) --- */
         #video-bg {
             position: fixed; 
             top: 50%; left: 50%;
@@ -27,20 +27,17 @@
             z-index: -3; 
             transform: translate(-50%, -50%);
             object-fit: cover;
-            /* Pastikan video gelap agar teks kebaca */
-            filter: brightness(0.7) contrast(1.1);
+            /* Filter dihapus agar video asli tampil apa adanya */
         }
 
-        /* Overlay gelap sinematik */
+        /* Overlay sangat tipis & TANPA BLUR agar video gelap tetap terlihat */
         .glass-overlay {
             position: fixed; 
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            /* Lighter overlay to let video show through */
-            background: linear-gradient(180deg, rgba(5, 5, 5, 0.6) 0%, rgba(15, 0, 0, 0.8) 100%);
-            /* BLUR DIKURANGI AGAR VIDEO KELIHTAN JELAS (PENTING!) */
-            backdrop-filter: blur(1.5px); 
+            background: rgba(0, 0, 0, 0.35); /* Transparansi dikurangi jadi cuma 35% */
             z-index: -2;
+            /* Blur dihilangkan total */
         }
 
         /* Container Utama */
@@ -53,32 +50,32 @@
             position: relative;
         }
 
-        /* --- ANIMASI MASUK (ENTRY ANIMATION) --- */
+        /* --- ANIMASI MASUK --- */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(30px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
-            opacity: 0; /* Mulai dari tidak terlihat */
+            opacity: 0; 
             animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
-        /* Delay agar munculnya bergantian */
-        .delay-1 { animation-delay: 0.1s; } /* Kotak Profil */
-        .delay-2 { animation-delay: 0.3s; } /* Spotify */
-        .delay-3 { animation-delay: 0.5s; } /* Instagram */
-        .delay-4 { animation-delay: 0.7s; } /* TikTok & F2P */
-        .delay-5 { animation-delay: 0.9s; } /* Footer */
+        .delay-1 { animation-delay: 0.1s; } 
+        .delay-2 { animation-delay: 0.3s; } 
+        .delay-3 { animation-delay: 0.5s; } 
+        .delay-4 { animation-delay: 0.7s; } 
+        .delay-5 { animation-delay: 0.9s; } 
 
-        /* Profil Avatar Dark Red */
+        /* Profil Avatar True Dark Red */
         .avatar {
             width: 110px; height: 110px;
             border-radius: 50%; 
-            border: 3px solid #660000; /* Dark Red solid */
+            /* Garis merah sangat gelap */
+            border: 2px solid #3a0000; 
             padding: 4px; margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(102, 0, 0, 0.5);
-            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
         }
 
         h1 {
@@ -88,57 +85,59 @@
             color: #ffffff;
             font-weight: 600;
             text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 5px #000;
         }
 
         .username {
             font-size: 0.85rem; 
-            color: #ff3333; /* Merah menyala tipis buat aksen */
+            color: #6a1a1a; /* Merah marun redup / kalem */
             font-weight: 400; 
             letter-spacing: 3px;
             margin-bottom: 50px; 
             text-transform: uppercase;
         }
 
-        /* --- TOMBOL MASCULINE STEALTH (DENGAN GARIS PUTUS-PUTUS) --- */
+        /* --- TOMBOL MASCULINE STEALTH --- */
         .links-container { display: flex; flex-direction: column; gap: 20px; }
         .btn-wrapper { width: 100%; }
 
         .link-card {
-            background: rgba(10, 10, 10, 0.7); /* Hitam transparan lebih pekat */
-            border-radius: 6px; /* Lebih kotak biar maskulin */
+            /* Latar hitam pekat agar menyatu dengan garis putus-putus */
+            background: rgba(5, 5, 5, 0.85); 
+            border-radius: 6px; 
             
-            /* GARIS PUTUS-PUTUS WARNA MERAH GELAP (PENTING!) */
-            border: 2px dashed #4a0000; 
+            /* Garis putus-putus Dark Red yang kalem dan menyatu dengan background hitam */
+            border: 2px dashed #3a0000; 
             
             padding: 16px 20px; 
-            color: #e0e0e0; 
+            color: #cccccc; 
             text-decoration: none;
             font-weight: 400; 
             letter-spacing: 1.5px;
             display: flex; align-items: center; justify-content: center; gap: 15px;
             transition: all 0.4s ease-in-out;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
-        /* Ikon abu-abu kalem */
-        .link-card i { font-size: 1.3rem; color: #660000; transition: 0.4s; width: 25px; text-align: center; }
+        /* Ikon merah sangat gelap */
+        .link-card i { font-size: 1.3rem; color: #4a0000; transition: 0.4s; width: 25px; text-align: center; }
 
-        /* Hover efek: nyala merah berkelas */
+        /* Hover efek: nyala merah marun (bukan merah terang) */
         .link-card:hover {
-            background: rgba(30, 0, 0, 0.9);
-            border-color: #ff3333; /* Jadi merah menyala saat hover */
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+            background: rgba(20, 0, 0, 0.95);
+            border-color: #8b0000; /* Dark red elegan */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
             color: #ffffff;
         }
 
-        .link-card:hover i { color: #ffffff; }
+        .link-card:hover i { color: #8b0000; }
 
         .footer { 
             margin-top: 80px; 
             font-size: 0.7rem; 
-            color: rgba(255, 51, 51, 0.3); /* Merah redup */
+            color: rgba(255, 255, 255, 0.15); /* Abu-abu sangat redup */
             letter-spacing: 4px; 
             text-transform: uppercase;
             font-weight: 400;
@@ -150,6 +149,7 @@
     <video autoplay muted loop playsinline id="video-bg">
         <source src="bg.mp4" type="video/mp4">
     </video>
+    
     <div class="glass-overlay"></div>
 
     <div class="container">
