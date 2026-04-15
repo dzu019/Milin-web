@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Links | Shotozakirei</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Dasar & Reset */
@@ -19,7 +19,7 @@
             min-height: 100vh;
         }
 
-        /* --- BACKGROUND VIDEO (DIJAMIN JELAS 100%) --- */
+        /* --- BACKGROUND VIDEO JELAS --- */
         #video-bg {
             position: fixed; 
             top: 50%; left: 50%;
@@ -27,17 +27,15 @@
             z-index: -3; 
             transform: translate(-50%, -50%);
             object-fit: cover;
-            /* Filter dihapus agar video asli tampil apa adanya */
         }
 
-        /* Overlay sangat tipis & TANPA BLUR agar video gelap tetap terlihat */
+        /* Overlay tipis tanpa blur agar video jelas */
         .glass-overlay {
             position: fixed; 
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.35); /* Transparansi dikurangi jadi cuma 35% */
+            background: rgba(5, 0, 0, 0.4); /* Transparansi pas, ada sentuhan merah super gelap */
             z-index: -2;
-            /* Blur dihilangkan total */
         }
 
         /* Container Utama */
@@ -67,15 +65,22 @@
         .delay-4 { animation-delay: 0.7s; } 
         .delay-5 { animation-delay: 0.9s; } 
 
-        /* Profil Avatar True Dark Red */
+        /* --- PROFIL AVATAR (ANIMASI NAIK TURUN) --- */
         .avatar {
             width: 110px; height: 110px;
             border-radius: 50%; 
-            /* Garis merah sangat gelap */
-            border: 2px solid #3a0000; 
+            border: 2px solid rgba(139, 0, 0, 0.3); /* Garis solid halus merah gelap */
             padding: 4px; margin-bottom: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(10, 0, 0, 0.7);
+            
+            /* Animasi naik-turun (floating) */
+            animation: floatAvatar 4s ease-in-out infinite;
+        }
+
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); } /* Bergerak naik 12 pixel */
         }
 
         h1 {
@@ -85,59 +90,56 @@
             color: #ffffff;
             font-weight: 600;
             text-transform: uppercase;
-            text-shadow: 0 2px 5px #000;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
         .username {
             font-size: 0.85rem; 
-            color: #6a1a1a; /* Merah marun redup / kalem */
-            font-weight: 400; 
+            color: #8b2a2a; /* Merah kalem */
+            font-weight: 500; 
             letter-spacing: 3px;
             margin-bottom: 50px; 
             text-transform: uppercase;
         }
 
-        /* --- TOMBOL MASCULINE STEALTH --- */
-        .links-container { display: flex; flex-direction: column; gap: 20px; }
+        /* --- TOMBOL (HITAM PEKAT + SEMBURAT MERAH) --- */
+        .links-container { display: flex; flex-direction: column; gap: 18px; }
         .btn-wrapper { width: 100%; }
 
         .link-card {
-            /* Latar hitam pekat agar menyatu dengan garis putus-putus */
-            background: rgba(5, 5, 5, 0.85); 
-            border-radius: 6px; 
-            
-            /* Garis putus-putus Dark Red yang kalem dan menyatu dengan background hitam */
-            border: 2px dashed #3a0000; 
+            /* Gradasi gelap hampir hitam, ada hint merah di ujung */
+            background: linear-gradient(145deg, rgba(15, 5, 5, 0.9), rgba(5, 0, 0, 0.95)); 
+            border-radius: 12px; /* Sudut melengkung halus, nggak aneh */
+            border: 1px solid rgba(139, 0, 0, 0.15); /* Garis batas tipis biar rapi */
             
             padding: 16px 20px; 
-            color: #cccccc; 
+            color: #d1d1d1; 
             text-decoration: none;
-            font-weight: 400; 
+            font-weight: 500; 
             letter-spacing: 1.5px;
             display: flex; align-items: center; justify-content: center; gap: 15px;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
         }
 
-        /* Ikon merah sangat gelap */
-        .link-card i { font-size: 1.3rem; color: #4a0000; transition: 0.4s; width: 25px; text-align: center; }
+        .link-card i { font-size: 1.3rem; color: #8b2a2a; transition: 0.3s; width: 25px; text-align: center; }
 
-        /* Hover efek: nyala merah marun (bukan merah terang) */
+        /* Hover efek: Warna merahnya sedikit lebih hidup saat disentuh */
         .link-card:hover {
-            background: rgba(20, 0, 0, 0.95);
-            border-color: #8b0000; /* Dark red elegan */
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(145deg, rgba(35, 10, 10, 0.95), rgba(15, 0, 0, 1));
+            border-color: rgba(139, 0, 0, 0.4); 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.2);
             color: #ffffff;
         }
 
-        .link-card:hover i { color: #8b0000; }
+        .link-card:hover i { color: #ffffff; }
 
         .footer { 
             margin-top: 80px; 
             font-size: 0.7rem; 
-            color: rgba(255, 255, 255, 0.15); /* Abu-abu sangat redup */
+            color: rgba(255, 255, 255, 0.2); 
             letter-spacing: 4px; 
             text-transform: uppercase;
             font-weight: 400;
@@ -149,7 +151,6 @@
     <video autoplay muted loop playsinline id="video-bg">
         <source src="bg.mp4" type="video/mp4">
     </video>
-    
     <div class="glass-overlay"></div>
 
     <div class="container">
