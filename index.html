@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Links | Shotozakirei</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * { 
@@ -16,9 +16,9 @@
         }
         
         html, body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #ffffff;
-            background-color: #050505;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #eaeaea;
+            background-color: #000;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -39,7 +39,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            filter: brightness(0.65) contrast(1.1);
+            filter: brightness(0.8) contrast(1.05); /* Sedikit ditegaskan agar kontras naik */
         }
 
         .overlay {
@@ -47,27 +47,28 @@
             top: 0; left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(15, 5, 10, 0.4) 0%, rgba(5, 0, 0, 0.85) 100%); 
+            /* Gradient vignette gelap profesional */
+            background: radial-gradient(circle at center, rgba(10, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%); 
             z-index: 1; 
         }
 
         .container {
             width: 100%;
             height: 100%;
-            max-width: 420px;
+            max-width: 400px;
             margin: 0 auto;
             text-align: center; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 24px 20px;
+            padding: 20px;
             z-index: 2;
             position: relative;
         }
 
         @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(25px); }
+            0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -75,21 +76,17 @@
         .delay-2 { animation-delay: 0.3s; } 
         .delay-3 { animation-delay: 0.45s; } 
 
-        .avatar-wrapper {
-            position: relative;
-            margin: 0 auto 16px auto;
-            width: 100px;
-            height: 100px;
-        }
-
         .avatar {
-            width: 100%; 
-            height: 100%;
+            width: 95px; 
+            height: 95px;
             border-radius: 50%; 
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 25px rgba(180, 0, 30, 0.5), inset 0 0 10px rgba(0,0,0,0.5);
+            border: 2px solid rgba(139, 0, 0, 0.6); 
+            padding: 4px; 
+            margin: 0 auto 15px auto;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.8);
+            background: rgba(15, 0, 0, 0.7);
             animation: floatAvatar 4s ease-in-out infinite;
+            object-fit: cover;
         }
 
         @keyframes floatAvatar {
@@ -100,115 +97,72 @@
         h1 { 
             font-size: 1.4rem; 
             font-weight: 700;
-            letter-spacing: 2px; 
+            letter-spacing: 3px; 
             color: #ffffff; 
             text-transform: uppercase; 
-            margin-bottom: 6px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin-bottom: 4px; 
         }
 
         .username { 
-            font-size: 0.75rem; 
+            font-size: 0.72rem; 
             font-weight: 600;
-            color: #ff4d6d; 
-            letter-spacing: 3px; 
-            margin-bottom: 30px; 
-            text-transform: uppercase;
-            text-shadow: 0 0 12px rgba(255, 77, 109, 0.4);
+            color: #a83232; 
+            letter-spacing: 4px; 
+            margin-bottom: 35px; 
+            text-transform: uppercase; 
         }
 
         .links-container { 
             display: flex; 
             flex-direction: column; 
-            gap: 16px; 
-            width: 100%; 
-            max-width: 320px;
+            gap: 14px; 
+            width: 88%; 
+            margin: 0 auto; 
         }
 
         .link-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.12); 
-            border-radius: 16px; 
-            border: 1px solid rgba(255, 255, 255, 0.22); 
-            padding: 14px 24px; 
+            /* Menaikkan opasitas background & border tipis yang bersih agar tetap gelap tapi TEGAS */
+            background: rgba(28, 5, 5, 0.65); 
+            border-radius: 50px; 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 14px 22px; 
             color: #ffffff; 
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600; 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             display: flex; 
             align-items: center; 
-            justify-content: flex-start;
-            gap: 16px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-            overflow: hidden;
+            justify-content: center; 
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
         }
 
-        /* Highlight sheen effect */
-        .link-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .link-card:hover::before {
-            left: 100%;
-        }
-
+        /* Semua logo tetap putih bersih seperti semula */
         .link-card i { 
-            font-size: 1.3rem; 
-            width: 24px; 
-            text-align: center;
-            transition: transform 0.3s ease;
+            font-size: 1.15rem; 
+            color: #ffffff; 
+            width: 20px; 
+            text-align: center; 
         }
 
-        .link-card span {
-            flex-grow: 1;
-            text-align: left;
-        }
-
-        .link-card .arrow-icon {
-            font-size: 0.75rem;
-            opacity: 0.5;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        /* Hover States */
+        /* Hover style profesional: Glow merah crimson lebih clean */
         .link-card:hover {
-            background: rgba(255, 255, 255, 0.22);
-            border-color: rgba(255, 255, 255, 0.45); 
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.15);
+            background: rgba(75, 10, 10, 0.85);
+            border-color: rgba(180, 30, 30, 0.6); 
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4), 0 8px 25px rgba(0, 0, 0, 0.6);
         }
-
-        .link-card:hover .arrow-icon {
-            opacity: 1;
-            transform: translateX(4px);
-        }
-
-        .link-card:hover i {
-            transform: scale(1.15);
-        }
-
-        /* Accent Icon Colors */
-        .spotify-card i { color: #1db954; }
-        .instagram-card i { color: #e1306c; }
-        .tiktok-card i { color: #00f2fe; }
 
         .footer { 
-            margin-top: 40px; 
-            font-size: 0.65rem; 
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.4); 
-            letter-spacing: 3px; 
+            margin-top: 45px; 
+            font-size: 0.6rem; 
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.25); 
+            letter-spacing: 4px; 
             text-transform: uppercase;
         }
     </style>
@@ -225,36 +179,26 @@
     <div class="container">
         
         <div class="fade-in delay-1">
-            <div class="avatar-wrapper">
-                <img src="avatar.jpg" alt="Profile" class="avatar">
-            </div>
+            <img src="avatar.jpg" alt="Profile" class="avatar">
             <h1>Shotozakirei</h1>
             <div class="username">@shotozakirei</div>
         </div>
 
         <div class="links-container fade-in delay-2">
-            <a href="https://open.spotify.com/user/31fr7mfuacdokppwhjcdi3zkzsla?si=2vas8obmST2ssZBLgJE0KA" class="link-card spotify-card" target="_blank">
-                <i class="fa-brands fa-spotify"></i>
-                <span>Spotify</span>
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            <a href="https://open.spotify.com/user/31fr7mfuacdokppwhjcdi3zkzsla?si=2vas8obmST2ssZBLgJE0KA" class="link-card" target="_blank">
+                <i class="fa-brands fa-spotify"></i><span>Spotify</span>
             </a>
 
-            <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card instagram-card" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-                <span>Instagram</span>
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            <a href="https://www.instagram.com/m.shotozakirei?igsh=YmJoODdnYzNrcG02" class="link-card" target="_blank">
+                <i class="fa-brands fa-instagram"></i><span>Instagram</span>
             </a>
 
-            <a href="https://tiktok.com/@alonerlonly" class="link-card tiktok-card" target="_blank">
-                <i class="fa-brands fa-tiktok"></i>
-                <span>TikTok</span>
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            <a href="https://tiktok.com/@alonerlonly" class="link-card" target="_blank">
+                <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
             </a>
 
-            <a href="https://www.instagram.com/dzul_019?xtok=MXAwdzh1NzFqNW05cA==" class="link-card instagram-card" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-                <span>Ilmi</span>
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
+            <a href="https://www.instagram.com/dzul_019?xtok=MXAwdzh1NzFqNW05cA==" class="link-card" target="_blank">
+                <i class="fa-brands fa-instagram"></i><span>Ilmi</span>
             </a>
         </div>
 
