@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('skeleton').classList.add('loaded');
         document.body.classList.add('web-ready');
-    }, 800); 
+    }, 600); 
 });
 
 setTimeout(() => {
@@ -64,12 +64,12 @@ document.addEventListener('click', function(e) {
     if(e.target.closest('.link-card') || e.target.closest('.share-btn')) return;
     
     const drop = document.createElement('div');
-    const icons = ['✦', '✧', '+', '⨯'];
+    const icons = ['✦', '✧', '⚡', '★'];
     drop.innerHTML = icons[Math.floor(Math.random() * icons.length)];
     drop.className = 'click-effect';
     drop.style.left = (e.clientX - 10) + 'px';
     drop.style.top = (e.clientY - 10) + 'px';
     document.body.appendChild(drop);
     
-    setTimeout(() => drop.remove(), 800);
+    setTimeout(() => drop.remove(), 700);
 });
