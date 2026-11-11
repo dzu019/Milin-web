@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
+        :root {
+            --primary-red: #a83232;
+            --dark-red: #4b0a0a;
+            --accent-red: #ff4d4d;
+        }
+        
         * { 
             margin: 0; 
             padding: 0; 
@@ -60,6 +66,21 @@
             background: radial-gradient(circle at center, rgba(10, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%); 
             z-index: 1; 
         }
+
+        /* Elemen Partikel Elegan */
+        .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+        .particles span { 
+            position: absolute; bottom: -50px; left: var(--left); font-size: var(--size); 
+            animation: floatUp var(--duration) linear infinite; animation-delay: var(--delay); 
+            opacity: 0; filter: drop-shadow(0 0 3px rgba(255, 77, 77, 0.3)); 
+            color: var(--accent-red); /* Mengubah warna partikel ke merah */
+        }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+
+        /* Efek Klik Icon */
+        .click-effect { position: fixed; pointer-events: none; animation: popOut 0.8s ease-out forwards; z-index: 9999; font-size: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); color: var(--accent-red); }
+        @keyframes popOut { 0% { transform: scale(0.5) translateY(0); opacity: 1; } 100% { transform: scale(1.5) translateY(-40px); opacity: 0; } }
+
 
         .container {
             width: 100%;
@@ -204,23 +225,37 @@
         .delay-2 { animation-delay: 0.25s; } 
         .delay-3 { animation-delay: 0.4s; } 
 
-        .avatar {
-            width: 95px; 
-            height: 95px;
-            border-radius: 50%; 
-            border: 2px solid rgba(139, 0, 0, 0.6); 
-            padding: 4px; 
-            margin: 0 auto 10px auto;
-            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.8);
+        /* Profile & Avatar Frame (Seperti Tema Sebelumnya, disesuaikan warna) */
+        .profile-container { position: relative; margin: 0 auto 10px auto; width: fit-content; }
+        
+        .avatar-frame { 
+            width: clamp(95px, 25vw, 110px); aspect-ratio: 1; margin: 0 auto; padding: 4px; 
+            display: grid; place-items: center; position: relative; border-radius: 50%; 
+            background: conic-gradient(from 25deg, rgba(139, 0, 0, 0.2), var(--primary-red), rgba(5, 0, 0, 0.5), var(--dark-red), rgba(139, 0, 0, 0.2)); 
+            box-shadow: 0 0 0 4px rgba(168, 50, 50, 0.1), 0 0 20px rgba(139, 0, 0, 0.4); 
+            animation: frame-breathe 4s ease-in-out infinite; 
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
+        }
+        
+        .avatar-frame:hover { transform: scale(1.05); }
+        
+        .avatar-frame::after { 
+            content: '❖'; /* Icon kecil di sudut */
+            width: 24px; height: 24px; position: absolute; right: 0px; bottom: 0px; 
+            display: grid; place-items: center; border: 2px solid rgba(255, 255, 255, 0.8); border-radius: 50%; 
+            color: #fff; background: linear-gradient(135deg, var(--primary-red), #330000); 
+            font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.6); transition: transform 0.3s; 
+        }
+        
+        .avatar-frame:hover::after { transform: scale(1.15) rotate(15deg); }
+        
+        .avatar { 
+            width: 100%; height: 100%; display: block; border-radius: 50%; 
+            border: 2px solid rgba(255,255,255,0.7); object-fit: cover; 
             background: rgba(15, 0, 0, 0.7);
-            animation: floatAvatar 4s ease-in-out infinite;
-            object-fit: cover;
         }
-
-        @keyframes floatAvatar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
+        
+        @keyframes frame-breathe { 50% { box-shadow: 0 0 0 6px rgba(168, 50, 50, 0.05), 0 0 25px rgba(139, 0, 0, 0.5); } }
 
         .greeting {
             font-size: 0.7rem;
@@ -229,6 +264,7 @@
             margin-bottom: 4px;
         }
 
+        /* Animasi Twinkle untuk Nama (Bintang) */
         h1 { 
             font-size: 1.4rem; 
             font-weight: 700;
@@ -236,12 +272,16 @@
             color: #ffffff; 
             text-transform: uppercase; 
             margin-bottom: 4px; 
+            display: inline-flex; align-items: center; gap: 8px; justify-content: center; width: 100%;
         }
+        
+        h1 span { display: inline-block; animation: twinkle 1.5s infinite alternate; font-size: 1.1rem; color: var(--accent-red); }
+        @keyframes twinkle { 0% { opacity: 0.4; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.1); } }
 
         .username { 
             font-size: 0.72rem; 
             font-weight: 600;
-            color: #a83232; 
+            color: var(--primary-red); 
             letter-spacing: 4px; 
             margin-bottom: 8px; 
             text-transform: uppercase; 
@@ -321,7 +361,7 @@
         }
 
         .link-card:hover::before, .link-card:active::before { left: 100%; }
-        .link-card:hover i, .link-card:active i { transform: scale(1.2) rotate(-5deg); }
+        .link-card:hover i, .link-card:active i { transform: scale(1.2) rotate(-5deg); color: var(--accent-red); }
         .link-card:hover span, .link-card:active span { letter-spacing: 2px; }
 
         .ripple {
@@ -329,12 +369,11 @@
             border-radius: 50%;
             transform: scale(0);
             animation: ripple-anim 0.6s linear;
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: rgba(255, 255, 255, 0.15);
             z-index: 1;
             pointer-events: none;
         }
-
-        @keyframes ripple-anim {
+          @keyframes ripple-anim {
             to { transform: scale(4); opacity: 0; }
         }
 
@@ -355,6 +394,16 @@
             <source src="bg.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
+    </div>
+    
+    <!-- Partikel Mengambang (Elegan, sesuai tema warna) -->
+    <div class="particles" aria-hidden="true">
+        <span style="--delay: 0s; --left: 15%; --duration: 8s; --size: 1rem;">✦</span>
+        <span style="--delay: 3s; --left: 45%; --duration: 9s; --size: 0.8rem;">✧</span>
+        <span style="--delay: 1s; --left: 80%; --duration: 7s; --size: 1.2rem;">✦</span>
+        <span style="--delay: 5s; --left: 25%; --duration: 10s; --size: 0.7rem;">+</span>
+        <span style="--delay: 2s; --left: 70%; --duration: 8.5s; --size: 0.9rem;">✧</span>
+        <span style="--delay: 4.5s; --left: 90%; --duration: 7.5s; --size: 1.1rem;">✦</span>
     </div>
 
     <div id="toast" class="toast"><i class="fa-solid fa-check"></i>Link disalin!</div>
@@ -379,9 +428,18 @@
         </div>
         
         <div class="fade-in delay-1">
-            <img src="avatar.jpg" alt="Profile Shotozakirei" class="avatar">
+            <!-- Frame Avatar Baru yang Bergerak -->
+            <div class="profile-container">
+                <div class="avatar-frame">
+                    <img src="avatar.jpg" alt="Profile Shotozakirei" class="avatar">
+                </div>
+            </div>
+            
             <div class="greeting" id="greeting"></div>
-            <h1>Shotozakirei</h1>
+            
+            <!-- Nama dengan efek bersinar elegan -->
+            <h1><span>✦</span>Shotozakirei<span>✦</span></h1>
+            
             <div class="username">@shotozakirei</div>
             <div class="bio">Tech Enthusiast | Linux Explorer</div>
         </div>
@@ -422,10 +480,10 @@
 
         const hour = new Date().getHours();
         const greetingEl = document.getElementById('greeting');
-        if (hour >= 5 && hour < 11) greetingEl.innerText = "Selamat Pagi ✨";
-        else if (hour >= 11 && hour < 15) greetingEl.innerText = "Selamat Siang ☀️";
-        else if (hour >= 15 && hour < 18) greetingEl.innerText = "Selamat Sore 🌅";
-        else greetingEl.innerText = "Selamat Malam 🌙";
+        if (hour >= 5 && hour < 11) greetingEl.innerText = "Selamat Pagi ✦";
+        else if (hour >= 11 && hour < 15) greetingEl.innerText = "Selamat Siang ✦";
+        else if (hour >= 15 && hour < 18) greetingEl.innerText = "Selamat Sore ✦";
+        else greetingEl.innerText = "Selamat Malam ✦";
 
         const shareBtn = document.getElementById('share-btn');
         const toast = document.getElementById('toast');
@@ -466,6 +524,21 @@
                 
                 this.appendChild(circle);
             });
+        });
+        
+        /* Efek Klik Icon Elegan (Menyebar saat diklik di mana saja) */
+        document.addEventListener('click', function(e) {
+            // Hindari memunculkan icon jika yang diklik adalah link card atau share button
+            if(e.target.closest('.link-card') || e.target.closest('.share-btn')) return;
+            
+            const drop = document.createElement('div');
+            const icons = ['✦', '✧', '+', '⨯'];
+            drop.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            drop.className = 'click-effect';
+            drop.style.left = (e.clientX - 10) + 'px';
+            drop.style.top = (e.clientY - 10) + 'px';
+            document.body.appendChild(drop);
+            setTimeout(() => drop.remove(), 800);
         });
     </script>
 </body>
